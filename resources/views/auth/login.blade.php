@@ -1,4 +1,18 @@
-<link rel="stylesheet" href="{{ asset('css/style.css') }}">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Isidompet</title>
+
+    {{-- FAVICON (icon di tab browser) --}}
+    <link rel="icon" type="image/png" href="{{ asset('logo.png') }}">
+    <link rel="apple-touch-icon" href="{{ asset('logo.png') }}">
+
+    {{-- CSS --}}
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+</head>
+<body>
 
 <div class="auth-container">
 
@@ -12,7 +26,7 @@
                 Kelola data admin dan sistem menggunakan dashboard modern.
             </p>
 
-            <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png">
+            <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="Illustration">
 
         </div>
 
@@ -21,6 +35,9 @@
     <div class="auth-right">
 
         <div class="auth-card">
+
+            {{-- LOGO DI ATAS FORM --}}
+            <img src="{{ asset('logo.png') }}" class="logo" alt="Logo">
 
             <h2>Login Admin</h2>
 
@@ -51,3 +68,6 @@
     </div>
 
 </div>
+
+</body>
+</html>
