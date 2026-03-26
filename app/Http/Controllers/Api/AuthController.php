@@ -53,4 +53,36 @@ class AuthController extends Controller
             'data' => $user
         ]);
     }
+
+    public function login(Request $request)
+    {
+        $request->validate([
+            'phone' => 'required',
+            'password' => 'required',
+        ]);
+
+        $user = User::where('phone', $request->phone)
+            ->orWhere('name', $request->phone)
+            ->first();
+
+        if (!$user) {
+            return response()->json([
+                'status' => false,
+                'message' => 'User tidak ditemukan'
+            ], 404);
+        }
+
+        if (!Hash::check($request->password, $user->password)) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Password salah'
+            ], 401);
+        }
+
+        return response()->json([
+            'status' => true,
+            'message' => 'Login berhasil',
+            'data' => $user
+        ]);
+    }
 }
