@@ -85,7 +85,7 @@
 
 
                                     <form id="delete-form-{{ $admin->id }}"
-                                        action="{{ route('admin.delete', $admin->id) }}" method="POST">
+                                        action="{{ route('admin.destroy', $admin->id) }}" method="POST">
 
                                         @csrf
                                         @method('DELETE')
