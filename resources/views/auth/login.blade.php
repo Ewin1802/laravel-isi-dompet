@@ -60,9 +60,9 @@
                     </button>
                 </form>
 
-                {{-- <div class="auth-link">
+                <div class="auth-link">
                 Belum punya akun? <a href="{{ route('register') }}">Register</a>
-            </div> --}}
+            </div>
 
             </div>
 
