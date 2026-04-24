@@ -2,60 +2,60 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Admin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 
 class AuthController extends Controller
 {
+    // REGISTER ADMIN
     public function register(Request $request)
     {
         $request->validate([
             'name' => 'required',
-            'email' => 'nullable|email|unique:users',
-            'phone' => 'required|unique:users',
+            'email' => 'required|email|unique:admins',
             'password' => 'required|confirmed|min:6',
         ]);
 
-        $phone = preg_replace('/^0/', '62', $request->phone);
-
-        $user = \App\Models\User::create([
+        $admin = Admin::create([
             'name' => $request->name,
             'email' => $request->email,
-            'phone' => $phone,
             'password' => Hash::make($request->password),
+            'status' => 1
         ]);
 
-        auth()->login($user);
+        auth()->login($admin);
 
         return redirect()->route('dashboard');
     }
 
+    // LOGIN ADMIN
     public function login(Request $request)
     {
         $request->validate([
-            'login' => 'required',
+            'email' => 'required|email',
             'password' => 'required',
         ]);
 
-        $loginInput = $request->login;
-
-        // cek apakah email atau nomor HP
-        $field = filter_var($loginInput, FILTER_VALIDATE_EMAIL) ? 'email' : 'phone';
-
-        // optional: format nomor Indo (08 → 628)
-        if ($field === 'phone') {
-            $loginInput = preg_replace('/^0/', '62', $loginInput);
-        }
+        Log::info('LOGIN ATTEMPT', [
+            'email' => $request->email,
+        ]);
 
         if (auth()->attempt([
-            $field => $loginInput,
+            'email' => $request->email,
             'password' => $request->password
         ])) {
+
+            Log::info('LOGIN SUCCESS');
+
             return redirect()->route('dashboard');
         }
 
+        Log::warning('LOGIN FAILED');
+
         return back()->withErrors([
-            'login' => 'Email / Nomor HP atau password salah',
+            'email' => 'Email atau password salah',
         ]);
     }
 }

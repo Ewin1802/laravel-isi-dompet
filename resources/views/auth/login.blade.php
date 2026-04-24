@@ -50,8 +50,7 @@
                 <form method="POST" action="{{ route('login.post') }}">
                     @csrf
 
-                    <input type="text" name="login" class="form-control" placeholder="Email atau Nomor HP (08xxxx)"
-                        required>
+                    <input type="email" name="email" class="form-control" placeholder="Email" required>
 
                     <input type="password" name="password" class="form-control" placeholder="Password" required>
 
@@ -60,9 +59,9 @@
                     </button>
                 </form>
 
-                <div class="auth-link">
-                Belum punya akun? <a href="{{ route('register') }}">Register</a>
-            </div>
+                {{-- <div class="auth-link">
+                    Belum punya akun? <a href="{{ route('register') }}">Register</a>
+                </div> --}}
 
             </div>
 

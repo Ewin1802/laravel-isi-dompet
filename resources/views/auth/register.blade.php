@@ -2,6 +2,7 @@
 
 <div class="auth-container">
 
+    <!-- LEFT -->
     <div class="auth-left">
         <div class="auth-left-content">
 
@@ -16,6 +17,7 @@
         </div>
     </div>
 
+    <!-- RIGHT -->
     <div class="auth-right">
 
         <div class="auth-card">
@@ -29,20 +31,16 @@
             <form method="POST" action="{{ route('register.store') }}">
                 @csrf
 
+                <!-- NAME -->
                 <input type="text" name="name" placeholder="Name" class="form-control" required>
 
-                <input type="text" name="phone" placeholder="Phone Number" class="form-control" required>
+                <!-- EMAIL (WAJIB SEKARANG) -->
+                <input type="email" name="email" placeholder="Email" class="form-control" required>
 
-                <input type="email" name="email" placeholder="Email (optional)" class="form-control">
-
+                <!-- PASSWORD -->
                 <div style="position:relative">
 
-                    <input
-                        type="password"
-                        id="password"
-                        name="password"
-                        placeholder="Password"
-                        class="form-control"
+                    <input type="password" id="password" name="password" placeholder="Password" class="form-control"
                         required>
 
                     <span onclick="togglePassword('password')"
@@ -52,15 +50,11 @@
 
                 </div>
 
+                <!-- CONFIRM PASSWORD -->
                 <div style="position:relative">
 
-                    <input
-                        type="password"
-                        id="password_confirmation"
-                        name="password_confirmation"
-                        placeholder="Confirm Password"
-                        class="form-control"
-                        required>
+                    <input type="password" id="password_confirmation" name="password_confirmation"
+                        placeholder="Confirm Password" class="form-control" required>
 
                     <span onclick="togglePassword('password_confirmation')"
                         style="position:absolute; right:15px; top:12px; cursor:pointer;">
@@ -86,15 +80,8 @@
 </div>
 
 <script>
-function togglePassword(id) {
-
-    let input = document.getElementById(id);
-
-    if (input.type === "password") {
-        input.type = "text";
-    } else {
-        input.type = "password";
+    function togglePassword(id) {
+        let input = document.getElementById(id);
+        input.type = input.type === "password" ? "text" : "password";
     }
-
-}
 </script>
