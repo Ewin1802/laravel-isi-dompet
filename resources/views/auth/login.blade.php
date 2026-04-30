@@ -4,64 +4,112 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - Isidompet</title>
+    <title>Login Admin</title>
 
-    {{-- FAVICON (icon di tab browser) --}}
-    <link rel="icon" type="image/png" href="{{ asset('logo.png') }}">
-    <link rel="apple-touch-icon" href="{{ asset('logo.png') }}">
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 
-    {{-- CSS --}}
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <style>
+        .auth-wrapper {
+            height: 100vh;
+            display: flex;
+        }
+
+        .auth-left {
+            flex: 1;
+            background: linear-gradient(135deg, #3b82f6, #1e3a8a);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .auth-right {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f8fafc;
+        }
+
+        .auth-card {
+            width: 100%;
+            max-width: 400px;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        .auth-card h2 {
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background: #3b82f6;
+            border: none;
+            color: white;
+            border-radius: 6px;
+            font-weight: bold;
+        }
+
+        .error {
+            color: red;
+            font-size: 12px;
+        }
+
+        @media(max-width:768px) {
+            .auth-left {
+                display: none;
+            }
+        }
+    </style>
+
 </head>
 
 <body>
 
-    <div class="auth-container">
+    <div class="auth-wrapper">
 
         <div class="auth-left">
-
-            <div class="auth-left-content">
-
-                <h1>Admin Panel</h1>
-
-                <p>
-                    Kelola data admin dan sistem menggunakan dashboard modern.
-                </p>
-
-                <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="Illustration">
-
-            </div>
-
+            <h1>ADMIN PANEL</h1>
+            <p>Manage your system professionally</p>
         </div>
 
         <div class="auth-right">
 
             <div class="auth-card">
+                <h2>Login</h2>
 
-                {{-- LOGO DI ATAS FORM --}}
-                <img src="{{ asset('logo.png') }}" class="logo" alt="Logo">
-
-                <h2>Login Admin</h2>
-
-                @if ($errors->any())
-                    <p style="color:red">{{ $errors->first() }}</p>
-                @endif
-
-                <form method="POST" action="{{ route('login.post') }}">
+                <form method="POST" action="/login">
                     @csrf
 
-                    <input type="email" name="email" class="form-control" placeholder="Email" required>
+                    <div class="form-group">
+                        <input type="email" name="email" placeholder="Email">
+                        @error('email')
+                            <div class="error">{{ $message }}</div>
+                        @enderror
+                    </div>
 
-                    <input type="password" name="password" class="form-control" placeholder="Password" required>
+                    <div class="form-group">
+                        <input type="password" name="password" placeholder="Password">
+                    </div>
 
-                    <button class="btn btn-primary">
-                        Login
-                    </button>
+                    <button type="submit">Login</button>
                 </form>
-
-                {{-- <div class="auth-link">
-                    Belum punya akun? <a href="{{ route('register') }}">Register</a>
-                </div> --}}
 
             </div>
 

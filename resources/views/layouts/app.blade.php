@@ -1,130 +1,133 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ config('app.name') }}</title>
 
-    <title>Admin Panel</title>
-
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 
 <body>
 
-    <div class="layout">
+    <div class="app">
 
-        <!-- SIDEBAR -->
-
-        <div class="sidebar" id="sidebar">
+        {{-- SIDEBAR --}}
+        <aside id="sidebar" class="sidebar">
 
             <div class="logo">
-                <i class="fa-solid fa-layer-group"></i>
-                Admin Panel
+                <span class="logo-text">JurnalDoi</span>
             </div>
 
             <ul>
 
                 <li>
-                    <a href="/dashboard" class="{{ request()->is('dashboard') ? 'active' : '' }}">
-
-                        <i class="fa-solid fa-chart-line"></i>
-                        <span>Dashboard</span>
-
+                    <a href="{{ route('dashboard') }}" class="{{ request()->routeIs('dashboard') ? 'active' : '' }}"
+                        data-title="Dashboard">
+                        <i class="fa-solid fa-gauge"></i>
+                        <span class="menu-text">Dashboard</span>
                     </a>
                 </li>
 
                 <li>
-                    <a href="/admin" class="{{ request()->is('admin*') ? 'active' : '' }}">
-
-                        <i class="fa-solid fa-user-shield"></i>
-                        <span>Admin</span>
-
-                    </a>
-                </li>
-
-                <!-- USERS MENU -->
-                <li>
-                    <a href="/users" class="{{ request()->is('users*') ? 'active' : '' }}">
-
+                    <a href="{{ route('users.index') }}" class="{{ request()->routeIs('users.*') ? 'active' : '' }}"
+                        data-title="Users">
                         <i class="fa-solid fa-users"></i>
-                        <span>Users</span>
-
+                        <span class="menu-text">Users</span>
                     </a>
                 </li>
 
                 <li>
-
-                    <form method="POST" action="/logout" class="logout-form">
-                        @csrf
-
-                        <button type="submit" class="logout-btn">
-
-                            <i class="fa-solid fa-right-from-bracket"></i>
-                            <span>Logout</span>
-
-                        </button>
-
-                    </form>
-
+                    <a href="{{ route('admin.index') }}" class="{{ request()->routeIs('admin.*') ? 'active' : '' }}"
+                        data-title="Admins">
+                        <i class="fa-solid fa-user-shield"></i>
+                        <span class="menu-text">Admins</span>
+                    </a>
                 </li>
 
             </ul>
 
-        </div>
+        </aside>
 
 
-        <!-- MAIN -->
+        {{-- MAIN --}}
+        <div class="main">
 
-        <div class="main" id="main">
+            {{-- HEADER --}}
+            <header class="header">
 
-            <!-- NAVBAR -->
-
-            <div class="navbar">
-
-                <div class="menu-btn">
-                    <i class="fa-solid fa-bars" id="menu-toggle"></i>
+                <div class="header-left">
+                    <button id="toggleSidebar" class="menu-btn">
+                        <i class="fa-solid fa-bars"></i>
+                    </button>
+                    <h3>@yield('title')</h3>
                 </div>
 
-                <div class="nav-user">
-                    Admin
+                <div class="header-right">
+
+                    @php $user = auth()->user(); @endphp
+
+                    <div class="user-dropdown" id="userDropdown">
+
+                        <div class="user-trigger" id="dropdownTrigger">
+
+                            <div class="user-info">
+                                <span class="user-name">{{ $user->name }}</span>
+                                <small class="user-role">{{ ucfirst($user->role ?? 'Admin') }}</small>
+                            </div>
+
+                            <div class="user-avatar">
+                                {{ strtoupper(substr($user->name, 0, 1)) }}
+                            </div>
+
+                        </div>
+
+                        {{-- DROPDOWN --}}
+                        <div class="dropdown-menu" id="dropdownMenu">
+
+                            <div class="dropdown-header">
+                                <strong>{{ $user->name }}</strong>
+                                <small>{{ $user->email }}</small>
+                            </div>
+
+                            <div class="dropdown-divider"></div>
+
+                            <a href="#" class="dropdown-item">
+                                <i class="fa-solid fa-user"></i> Profile
+                            </a>
+
+                            <a href="#" class="dropdown-item">
+                                <i class="fa-solid fa-gear"></i> Settings
+                            </a>
+
+                            <div class="dropdown-divider"></div>
+
+                            <form method="POST" action="{{ route('logout') }}">
+                                @csrf
+                                <button class="dropdown-item logout">
+                                    <i class="fa-solid fa-right-from-bracket"></i> Logout
+                                </button>
+                            </form>
+
+                        </div>
+
+                    </div>
+
                 </div>
 
-            </div>
-
-
-            <!-- CONTENT -->
+            </header>
 
             <div class="content">
-
                 @yield('content')
-
             </div>
 
         </div>
 
     </div>
 
-
-    <!-- TOGGLE SCRIPT -->
-
-    <script>
-        const toggleBtn = document.getElementById("menu-toggle");
-        const sidebar = document.getElementById("sidebar");
-
-        toggleBtn.addEventListener("click", function() {
-
-            sidebar.classList.toggle("sidebar-hide");
-
-        });
-    </script>
-
+    <script src="{{ asset('js/app.js') }}"></script>
 
 </body>
 
