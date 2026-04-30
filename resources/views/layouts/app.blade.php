@@ -50,7 +50,7 @@
             </ul>
 
         </aside>
-
+        <div id="sidebarOverlay" class="sidebar-overlay"></div>
 
         {{-- MAIN --}}
         <div class="main">
