@@ -363,6 +363,11 @@ body {
     background: #f9fafb;
 }
 
+.table {
+    width: 100%;
+    min-width: 500px; /* biar tidak gepeng */
+}
+
 /* NAME */
 .name {
     font-weight: 500;
@@ -627,10 +632,12 @@ table td {
 }
 
 /* BOTTOM */
+/* BOTTOM SECTION */
 .dashboard-bottom {
     margin-top: 30px;
+
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     gap: 20px;
 }
 
@@ -638,6 +645,8 @@ table td {
     background: #fff;
     padding: 20px;
     border-radius: 12px;
+    width: 100%;
+    overflow-x: auto;
 }
 
 /* MODAL BACKDROP */
@@ -752,6 +761,13 @@ table td {
     /* MAIN FULL */
     .main {
         margin-left: 0 !important;
+    }
+    .content {
+        padding: 15px;
+    }
+
+    .dashboard-grid {
+        grid-template-columns: 1fr;
     }
 
 }
