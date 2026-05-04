@@ -52,7 +52,8 @@
                     <tr>
                         <td>
                             <img src="{{ $user->photo ? asset('storage/' . $user->photo) : asset('images/default.png') }}"
-                                class="avatar" alt="photo">
+                                class="avatar" alt="photo"
+                                onerror="this.onerror=null; this.src='{{ asset('images/default.png') }}';">
                         </td>
                         <td>{{ $user->name }}</td>
                         <td>{{ $user->phone }}</td>
