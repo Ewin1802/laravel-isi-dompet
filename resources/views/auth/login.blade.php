@@ -85,8 +85,12 @@
     <div class="auth-wrapper">
 
         <div class="auth-left">
-            <h1>ADMIN PANEL</h1>
+
+            <img src="{{ asset('logo.png') }}" class="auth-logo" alt="logo">
+
+            <h1>ADMIN PANEL | JURNALDOI</h1>
             <p>Manage your system professionally</p>
+
         </div>
 
         <div class="auth-right">

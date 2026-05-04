@@ -51,9 +51,15 @@
                 @foreach ($recentUsers as $user)
                     <tr>
                         <td>
-                            <img src="{{ $user->photo ? asset('storage/' . $user->photo) : asset('images/default.png') }}"
-                                class="avatar" alt="photo"
-                                onerror="this.onerror=null; this.src='{{ asset('images/default.png') }}';">
+                            <div class="avatar-wrapper">
+                                @if (!empty($user->photo))
+                                    <img src="{{ asset('storage/' . $user->photo) }}" alt="photo">
+                                @else
+                                    <div class="avatar-fallback">
+                                        {{ strtoupper(substr($user->name, 0, 1)) }}
+                                    </div>
+                                @endif
+                            </div>
                         </td>
                         <td>{{ $user->name }}</td>
                         <td>{{ $user->phone }}</td>

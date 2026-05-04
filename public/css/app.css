@@ -45,6 +45,22 @@ body {
     transition: 0.2s;
 }
 
+.auth-logo {
+    width: 80px;
+    margin-bottom: 20px;
+
+    /* efek elegan */
+    border-radius: 12px;
+    padding: 8px;
+    background: rgba(255, 255, 255, 0.15);
+
+    /* glass effect */
+    backdrop-filter: blur(6px);
+
+    /* shadow halus */
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
 /* MENU */
 .sidebar ul {
     list-style: none;
@@ -718,6 +734,67 @@ table td {
     cursor: pointer;
 }
 
+.avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.avatar-text {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #4f46e5;
+    /* warna default */
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
+/* container avatar */
+.avatar-wrapper {
+    width: 42px;
+    height: 42px;
+    position: relative;
+}
+
+/* paksa semua img dalam avatar */
+.avatar-wrapper img {
+    width: 42px !important;
+    height: 42px !important;
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+}
+
+/* fallback huruf */
+.avatar-fallback {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-weight: 600;
+    color: white;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    background: linear-gradient(135deg, #6366f1, #8b5cf6);
+}
+
+/* biar tabel rapi */
+td {
+    vertical-align: middle;
+}
+
 /* ANIMATION */
 @keyframes fadeIn {
     from {
@@ -763,12 +840,7 @@ table td {
         display: block;
     }
 
-    .avatar {
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        object-fit: cover;
-    }
+
 
     /* MAIN FULL */
     .main {
