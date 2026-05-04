@@ -94,15 +94,15 @@
 
                             <div class="dropdown-divider"></div>
 
-                            <a href="#" class="dropdown-item">
+                            {{-- <a href="#" class="dropdown-item">
                                 <i class="fa-solid fa-user"></i> Profile
                             </a>
 
                             <a href="#" class="dropdown-item">
                                 <i class="fa-solid fa-gear"></i> Settings
-                            </a>
+                            </a> --}}
 
-                            <div class="dropdown-divider"></div>
+                            {{-- <div class="dropdown-divider"></div> --}}
 
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf

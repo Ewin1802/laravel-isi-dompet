@@ -42,6 +42,7 @@
 
             <table class="table">
                 <tr>
+                    <th>Photo</th>
                     <th>Name</th>
                     <th>Phone</th>
                     <th>Role</th>
@@ -49,6 +50,10 @@
 
                 @foreach ($recentUsers as $user)
                     <tr>
+                        <td>
+                            <img src="{{ $user->photo ? asset('storage/' . $user->photo) : asset('images/default.png') }}"
+                                class="avatar" alt="photo">
+                        </td>
                         <td>{{ $user->name }}</td>
                         <td>{{ $user->phone }}</td>
                         <td>
